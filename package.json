@@ -1,5 +1,5 @@
 {
-  "name": "react-skeleton",
+  "name": "react-responsive-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GreeKatrina/react-skeleton.git"
+    "url": "git+https://github.com/GreeKatrina/react-responsive-demo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GreeKatrina/react-skeleton/issues"
+    "url": "https://github.com/GreeKatrina/react-responsive-demo/issues"
   },
-  "homepage": "https://github.com/GreeKatrina/react-skeleton#readme",
+  "homepage": "https://github.com/GreeKatrina/react-responsive-demo#readme",
   "dependencies": {
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",

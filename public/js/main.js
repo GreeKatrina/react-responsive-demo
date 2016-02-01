@@ -19032,53 +19032,239 @@ module.exports = require('./lib/React');
 
 },{"./lib/React":53}],159:[function(require,module,exports){
 var React = require('react');
-var ListItem = require('./ListItem.jsx');
 
-var ingredients = [{ "id": 1, "text": "ham" }, { "id": 2, "text": "cheese" }, { "id": 3, "text": "potatoes" }];
-
-var List = React.createClass({
-    displayName: 'List',
+var WidgetLarge = React.createClass({
+    displayName: "WidgetLarge",
 
     render: function () {
-        var listItems = ingredients.map(function (item) {
-            return React.createElement(ListItem, { key: item.id, ingredient: item.text });
-        });
+
+        var panelStyle = {};
+
+        var headingStyle = {
+            height: 100
+        };
+
+        var footerStyle = {
+            background: "#373c3c",
+            // Get rid of white space between footer and header
+            borderTop: "1px solid #373c3c",
+            textAlign: "center"
+        };
+
+        var footerTextStyle = {
+            fontSize: 18,
+            color: "white"
+        };
+
+        var footerLabelStyle = {
+            fontSize: 10,
+            color: "#aaa"
+        };
+
+        if (this.props.bodyColor) {
+            headingStyle.background = this.props.bodyColor;
+            headingStyle.borderBottom = "1px solid " + this.props.bodyColor;
+        }
 
         return React.createElement(
-            'ul',
-            null,
-            listItems
-        );
-    }
-});
-
-module.exports = List;
-
-},{"./ListItem.jsx":160,"react":158}],160:[function(require,module,exports){
-var React = require('react');
-var ListItem = React.createClass({
-    displayName: 'ListItem',
-
-    render: function () {
-        return React.createElement(
-            'li',
-            null,
+            "div",
+            { style: panelStyle, className: "panel panel-default" },
+            React.createElement("div", { style: headingStyle, className: "panel-heading" }),
             React.createElement(
-                'h4',
-                null,
-                this.props.ingredient
+                "div",
+                { style: footerStyle, className: "panel-footer" },
+                React.createElement(
+                    "div",
+                    { className: "row" },
+                    React.createElement(
+                        "div",
+                        { style: footerTextStyle, className: "col-xs-4" },
+                        this.props.leftText
+                    ),
+                    React.createElement(
+                        "div",
+                        { style: footerTextStyle, className: "col-xs-4" },
+                        this.props.middleText
+                    ),
+                    React.createElement(
+                        "div",
+                        { style: footerTextStyle, className: "col-xs-4" },
+                        this.props.rightText
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "row" },
+                    React.createElement(
+                        "div",
+                        { style: footerLabelStyle, className: "col-xs-4" },
+                        this.props.leftLabel
+                    ),
+                    React.createElement(
+                        "div",
+                        { style: footerLabelStyle, className: "col-xs-4" },
+                        this.props.middleLabel
+                    ),
+                    React.createElement(
+                        "div",
+                        { style: footerLabelStyle, className: "col-xs-4" },
+                        this.props.rightLabel
+                    )
+                )
             )
         );
     }
 });
 
-module.exports = ListItem;
+module.exports = WidgetLarge;
+
+},{"react":158}],160:[function(require,module,exports){
+var React = require('react');
+
+var WidgetMedium = React.createClass({
+    displayName: "WidgetMedium",
+
+    render: function () {
+
+        var panelStyle = {
+            height: 100
+        };
+
+        var bodyStyle = {},
+            bodyTextStyle = {},
+            bodyLabelStyle = {};
+
+        if (this.props.color) {
+            panelStyle.background = this.props.color;
+
+            bodyStyle.textAlign = "center";
+
+            bodyTextStyle.fontSize = 24;
+            bodyTextStyle.color = "white";
+
+            bodyLabelStyle.fontSize = 10;
+            bodyLabelStyle.color = "white";
+        } else {
+            bodyTextStyle.paddingTop = 10;
+            bodyTextStyle.fontSize = 16;
+            bodyTextStyle.color = "#373c3c";
+            bodyTextStyle.fontWeight = "bold";
+
+            bodyLabelStyle.fontSize = 10;
+            bodyLabelStyle.color = "#aaa";
+        }
+
+        return React.createElement(
+            "div",
+            { style: panelStyle, className: "panel panel-default" },
+            React.createElement(
+                "div",
+                { style: bodyStyle, className: "panel-body" },
+                React.createElement(
+                    "div",
+                    { style: bodyTextStyle },
+                    this.props.text
+                ),
+                React.createElement(
+                    "div",
+                    { style: bodyLabelStyle },
+                    this.props.label
+                )
+            )
+        );
+    }
+});
+
+module.exports = WidgetMedium;
 
 },{"react":158}],161:[function(require,module,exports){
 var React = require('react');
+
+var WidgetSmall = React.createClass({
+    displayName: "WidgetSmall",
+
+    render: function () {
+
+        var panelStyle = {},
+            headingStyle = {
+            background: this.props.color,
+            color: "white"
+        },
+            headingTextStyle = {
+            fontSize: 16,
+            // This is in em, not pixels
+            lineHeight: 1.1,
+            fontWeight: "bold"
+        },
+            headingLabelStyle = {
+            fontSize: 10
+        };
+
+        return React.createElement(
+            "div",
+            { style: panelStyle, className: "panel panel-default" },
+            React.createElement(
+                "div",
+                { style: headingStyle, className: "panel-heading" },
+                React.createElement(
+                    "div",
+                    { style: headingLabelStyle },
+                    this.props.label
+                ),
+                React.createElement(
+                    "div",
+                    { style: headingTextStyle },
+                    this.props.text
+                )
+            ),
+            React.createElement("div", { className: "panel-body" })
+        );
+    }
+});
+
+module.exports = WidgetSmall;
+
+},{"react":158}],162:[function(require,module,exports){
+var React = require('react');
 var ReactDOM = require('react-dom');
-var List = require('./components/List.jsx');
+var WidgetLarge = require('./components/WidgetLarge.jsx');
+var WidgetMedium = require('./components/WidgetMedium.jsx');
+var WidgetSmall = require('./components/WidgetSmall.jsx');
 
-ReactDOM.render(React.createElement(List, null), document.getElementById('ingredients'));
+ReactDOM.render(React.createElement(WidgetMedium, { text: '20', label: 'New followers added this month' }), document.getElementById('leftMediumWidget'));
 
-},{"./components/List.jsx":159,"react":158,"react-dom":29}]},{},[161]);
+ReactDOM.render(React.createElement(WidgetMedium, { text: '$ 1250', label: 'Average Monthly Income' }), document.getElementById('middleMediumWidget'));
+
+ReactDOM.render(React.createElement(WidgetMedium, { text: '$ 13865', label: 'Yearly Income Goal' }), document.getElementById('rightMediumWidget'));
+
+ReactDOM.render(React.createElement(WidgetMedium, { text: '18°', label: 'Paris', color: '#ff7306' }), document.getElementById('orangeMediumWidget'));
+
+ReactDOM.render(React.createElement(WidgetLarge, {
+    bodyColor: '#0086c5',
+    leftText: '15080',
+    leftLabel: 'Shot Views',
+    middleText: '12000',
+    middleLabel: 'Likes',
+    rightText: '5100',
+    rightLabel: 'Comments'
+}), document.getElementById('blueLargeWidget'));
+
+ReactDOM.render(React.createElement(WidgetLarge, {
+    bodyColor: '#c5439d',
+    leftText: '15080',
+    leftLabel: 'Shot Views',
+    middleText: '12000',
+    middleLabel: 'Likes',
+    rightText: '5100',
+    rightLabel: 'Comments'
+}), document.getElementById('pinkLargeWidget'));
+
+ReactDOM.render(React.createElement(WidgetSmall, { text: '1.5k', label: 'New Visitors', color: '#0086c5' }), document.getElementById('blueSmallWidget'));
+
+ReactDOM.render(React.createElement(WidgetSmall, { text: '50%', label: 'Bounce Rate', color: '#a376cc' }), document.getElementById('purpleSmallWidget'));
+
+ReactDOM.render(React.createElement(WidgetSmall, { text: '28%', label: 'Searches', color: '#ff2d1b' }), document.getElementById('redSmallWidget'));
+
+ReactDOM.render(React.createElement(WidgetSmall, { text: '140.5kb', label: 'Traffic', color: '#4bb645' }), document.getElementById('greenSmallWidget'));
+
+},{"./components/WidgetLarge.jsx":159,"./components/WidgetMedium.jsx":160,"./components/WidgetSmall.jsx":161,"react":158,"react-dom":29}]},{},[162]);
